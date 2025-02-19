@@ -1,0 +1,43 @@
+version: '3'
+services:
+  node1:
+    build: .
+    container_name: bitcoin-node1
+    networks:
+      bitcoin_net:
+        ipv4_address: 172.20.0.2
+    ports:
+      - "8331:8332"
+      - "8332:8333"
+    volumes:
+      - ./node1:/root/.bitcoin
+
+  node2:
+    build: .
+    container_name: bitcoin-node2
+    networks:
+      bitcoin_net:
+        ipv4_address: 172.20.0.3
+    ports:
+      - "8341:8332"
+      - "8342:8333"
+    volumes:
+      - ./node2:/root/.bitcoin
+
+  node3:
+    build: .
+    container_name: bitcoin-node3
+    networks:
+      bitcoin_net:
+        ipv4_address: 172.20.0.4
+    ports:
+      - "8351:8332"
+      - "8352:8333"
+    volumes:
+      - ./node3:/root/.bitcoin
+
+networks:
+  bitcoin_net:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
